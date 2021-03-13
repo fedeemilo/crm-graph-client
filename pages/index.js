@@ -15,7 +15,7 @@ const Index = () => {
   if (loading) return "Cargando...";
 
   if (!data.obtenerClientesVendedor) {
-    return router.push("/login");
+    window.location.href = 'login';
   }
 
   return (
