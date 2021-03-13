@@ -21,6 +21,7 @@ const Layout = ({ children }) => {
           href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
           rel="stylesheet"
         />
+     
       </Head>
 
       {router.pathname === "/login" || router.pathname === "/register" ? (

@@ -10,7 +10,7 @@ const Productos = () => {
 
   const { data, loading } = useQuery(OBTENER_PRODUCTOS);
 
-  if (loading) return "Cargando...";
+  if (loading) return <Layout></Layout>;
 
   if (!data.obtenerProductos) {
     return router.push("/login");

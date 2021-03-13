@@ -7,7 +7,7 @@ import { OBTENER_PEDIDOS } from "../gql/querys";
 const Pedidos = () => {
   const { data, loading } = useQuery(OBTENER_PEDIDOS);
 
-  if (loading) return "Cargando...";
+  if (loading) return <Layout></Layout>;
 
   const { obtenerPedidosVendedor } = data;
 

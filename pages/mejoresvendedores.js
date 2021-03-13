@@ -26,7 +26,7 @@ const MejoresVendedores = () => {
     };
   }, [startPolling, stopPolling]);
 
-  if (loading) return "Cargando...";
+  if (loading) return <Layout></Layout>;
 
   const { mejoresVendedores } = data;
 

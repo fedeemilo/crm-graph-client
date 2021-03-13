@@ -12,10 +12,10 @@ const Index = () => {
   // Consulta de Apollo
   const { data, loading } = useQuery(OBTENER_CLIENTES_USUARIO);
 
-  if (loading) return "Cargando...";
+  if (loading) return <Layout></Layout>;
 
   if (!data.obtenerClientesVendedor) {
-    window.location.href = 'login';
+    window.location.href = "login";
   }
 
   return (
