@@ -4,6 +4,7 @@ import { useQuery } from "@apollo/client";
 import { OBTENER_CLIENTES_USUARIO } from "../gql/querys";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import Loading from "../components/ui/Loading";
 
 const Index = () => {
   // routing
@@ -12,7 +13,12 @@ const Index = () => {
   // Consulta de Apollo
   const { data, loading } = useQuery(OBTENER_CLIENTES_USUARIO);
 
-  if (loading) return <Layout></Layout>;
+  if (loading)
+    return (
+      <Layout>
+        <Loading />
+      </Layout>
+    );
 
   if (!data.obtenerClientesVendedor) {
     window.location.href = "login";

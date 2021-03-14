@@ -3,11 +3,17 @@ import Pedido from "../components/Pedido";
 import Link from "next/link";
 import { useQuery } from "@apollo/client";
 import { OBTENER_PEDIDOS } from "../gql/querys";
+import Loading from "../components/ui/Loading";
 
 const Pedidos = () => {
   const { data, loading } = useQuery(OBTENER_PEDIDOS);
 
-  if (loading) return <Layout></Layout>;
+  if (loading)
+    return (
+      <Layout>
+        <Loading />
+      </Layout>
+    );
 
   const { obtenerPedidosVendedor } = data;
 

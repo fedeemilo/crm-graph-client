@@ -1,26 +1,27 @@
-import React from "react"
-import Swal from "sweetalert2"
-import { useRouter } from "next/router"
-import Layout from "../../components/Layout"
-import { useQuery, useMutation } from "@apollo/client"
-import { OBTENER_CLIENTE, OBTENER_CLIENTES_USUARIO } from "../../gql/querys"
-import { Formik } from "formik"
-import * as Yup from "yup"
-import { ACTUALIZAR_CLIENTE } from "../../gql/mutations"
+import React from "react";
+import Swal from "sweetalert2";
+import { useRouter } from "next/router";
+import Layout from "../../components/Layout";
+import Loading from "../../components/ui/Loading";
+import { useQuery, useMutation } from "@apollo/client";
+import { OBTENER_CLIENTE, OBTENER_CLIENTES_USUARIO } from "../../gql/querys";
+import { Formik } from "formik";
+import * as Yup from "yup";
+import { ACTUALIZAR_CLIENTE } from "../../gql/mutations";
 
 const EditarCliente = () => {
   // Obtener el ID actual
-  const router = useRouter()
+  const router = useRouter();
   const {
     query: { id }
-  } = router
+  } = router;
 
   // Consultar para obtener el cliente
   const { data, loading } = useQuery(OBTENER_CLIENTE, {
     variables: {
       id
     }
-  })
+  });
 
   // Actualizar el cliente
   const [actualizarCliente] = useMutation(ACTUALIZAR_CLIENTE, {
@@ -28,7 +29,7 @@ const EditarCliente = () => {
       // Obtengo el objeto de cache que deseo actualizar
       const { obtenerClientesVendedor } = cache.readQuery({
         query: OBTENER_CLIENTES_USUARIO
-      })
+      });
 
       // Reescribo el cache
       cache.writeQuery({
@@ -39,9 +40,9 @@ const EditarCliente = () => {
             actualizarCliente
           ]
         }
-      })
+      });
     }
-  })
+  });
 
   // Schema de validación
   const schemaValidation = Yup.object({
@@ -51,15 +52,20 @@ const EditarCliente = () => {
     email: Yup.string()
       .required("El email del cliente es obligatorio")
       .email("El email no es válido")
-  })
+  });
 
-  if (loading) return "Cargando..."
+  if (loading)
+    return (
+      <Layout>
+        <Loading/>
+      </Layout>
+    );
 
-  const { obtenerCliente } = data
+  const { obtenerCliente } = data;
 
   // Modifica el cliente en la BD
   const actualizarInfoCliente = async values => {
-    const { nombre, apellido, email, empresa, telefono } = values
+    const { nombre, apellido, email, empresa, telefono } = values;
 
     try {
       const { data } = await actualizarCliente({
@@ -73,21 +79,21 @@ const EditarCliente = () => {
             telefono
           }
         }
-      })
+      });
 
       // Mostrar alerta
       Swal.fire(
         "Actualizado!",
         "El cliente se actualizó correctamente",
         "success"
-      )
+      );
 
       // Redireccionar
-      router.push("/")
+      router.push("/");
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-  }
+  };
 
   return (
     <Layout>
@@ -100,7 +106,7 @@ const EditarCliente = () => {
             enableReinitialize
             initialValues={obtenerCliente}
             onSubmit={values => {
-              actualizarInfoCliente(values)
+              actualizarInfoCliente(values);
             }}
           >
             {props => {
@@ -238,17 +244,17 @@ const EditarCliente = () => {
 
                   <input
                     type="submit"
-                    className="bg-gray-800 w-full mt-5 p-2 text-white uppercase font-bold hover:bg-blue-900 transition duration-500 cursor-pointer"
+                    className="rounded bg-gray-800 w-full mt-5 p-2 text-white uppercase font-bold hover:bg-blue-900 transition duration-500 cursor-pointer"
                     value="Editar Cliente"
                   />
                 </form>
-              )
+              );
             }}
           </Formik>
         </div>
       </div>
     </Layout>
-  )
-}
+  );
+};
 
-export default EditarCliente
+export default EditarCliente;

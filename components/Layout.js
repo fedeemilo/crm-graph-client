@@ -4,6 +4,7 @@ import React from "react"
 import Sidebar from "../components/Sidebar"
 import Header from "../components/Header"
 
+
 const Layout = ({ children }) => {
   // Hook de routing
   const router = useRouter()
@@ -21,7 +22,6 @@ const Layout = ({ children }) => {
           href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
           rel="stylesheet"
         />
-     
       </Head>
 
       {router.pathname === "/login" || router.pathname === "/register" ? (

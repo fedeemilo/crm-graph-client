@@ -4,13 +4,19 @@ import { useRouter } from "next/router";
 import { OBTENER_PRODUCTOS } from "../gql/querys";
 import { useQuery } from "@apollo/client";
 import Producto from "../components/Producto";
+import Loading from "../components/ui/Loading";
 
 const Productos = () => {
   const router = useRouter();
 
   const { data, loading } = useQuery(OBTENER_PRODUCTOS);
 
-  if (loading) return <Layout></Layout>;
+  if (loading)
+    return (
+      <Layout>
+        <Loading />
+      </Layout>
+    );
 
   if (!data.obtenerProductos) {
     return router.push("/login");

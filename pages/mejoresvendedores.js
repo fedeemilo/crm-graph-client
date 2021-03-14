@@ -12,6 +12,7 @@ import {
 } from "recharts";
 import { useQuery } from "@apollo/client";
 import { MEJORES_VENDEDORES } from "../gql/querys";
+import Loading from "../components/ui/Loading";
 
 const MejoresVendedores = () => {
   const { data, loading, startPolling, stopPolling } = useQuery(
@@ -26,7 +27,12 @@ const MejoresVendedores = () => {
     };
   }, [startPolling, stopPolling]);
 
-  if (loading) return <Layout></Layout>;
+  if (loading)
+    return (
+      <Layout>
+        <Loading />
+      </Layout>
+    );
 
   const { mejoresVendedores } = data;
 

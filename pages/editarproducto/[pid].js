@@ -1,26 +1,27 @@
-import React from "react"
-import Swal from "sweetalert2"
-import { useRouter } from "next/router"
-import Layout from "../../components/Layout"
-import { useQuery, useMutation } from "@apollo/client"
-import { OBTENER_PRODUCTO, OBTENER_PRODUCTOS } from "../../gql/querys"
-import { Formik } from "formik"
-import * as Yup from "yup"
-import { ACTUALIZAR_PRODUCTO } from "../../gql/mutations"
+import React from "react";
+import Swal from "sweetalert2";
+import { useRouter } from "next/router";
+import Layout from "../../components/Layout";
+import Loading from "../../components/ui/Loading";
+import { useQuery, useMutation } from "@apollo/client";
+import { OBTENER_PRODUCTO, OBTENER_PRODUCTOS } from "../../gql/querys";
+import { Formik } from "formik";
+import * as Yup from "yup";
+import { ACTUALIZAR_PRODUCTO } from "../../gql/mutations";
 
 const EditarProducto = () => {
   // Obtener el ID actual
-  const router = useRouter()
+  const router = useRouter();
   const {
     query: { id }
-  } = router
+  } = router;
 
   // Consultar para obtener el producto
   const { data, loading } = useQuery(OBTENER_PRODUCTO, {
     variables: {
       id
     }
-  })
+  });
 
   // Actualizar producto
   const [actualizarProducto] = useMutation(ACTUALIZAR_PRODUCTO, {
@@ -28,7 +29,7 @@ const EditarProducto = () => {
       // Obtener copia de cache
       const { obtenerProductos } = cache.readQuery({
         query: OBTENER_PRODUCTOS
-      })
+      });
 
       // Reescribo el cache
       cache.writeQuery({
@@ -36,23 +37,28 @@ const EditarProducto = () => {
         data: {
           obtenerProductos: [...obtenerProductos, actualizarProducto]
         }
-      })
+      });
     }
-  })
+  });
 
   // Schema de validación
   const schemaValidation = Yup.object({
     nombre: Yup.string().required("El nombre del producto es obligatorio"),
     stock: Yup.string().required("El stock del producto es obligatorio"),
     precio: Yup.string().required("El precio del producto es obligatorio")
-  })
+  });
 
-  if (loading) return "Cargando..."
+  if (loading)
+    return (
+      <Layout>
+        <Loading />
+      </Layout>
+    );
 
-  const { obtenerProducto } = data
+  const { obtenerProducto } = data;
 
   const actualizarInfoProducto = async values => {
-    const { nombre, stock, precio } = values
+    const { nombre, stock, precio } = values;
 
     try {
       const { data } = await actualizarProducto({
@@ -64,23 +70,21 @@ const EditarProducto = () => {
             stock
           }
         }
-      })
-
-      console.log(data)
+      });
 
       // Mostrar alerta
       Swal.fire(
         "Actualizado!",
         "El producto se actualizó correctamente",
         "success"
-      )
+      );
 
       // Redireccionar
-      router.push("/productos")
+      router.push("/productos");
     } catch (err) {
-      console.log(err)
+      console.log(err);
     }
-  }
+  };
 
   return (
     <Layout>
@@ -95,12 +99,11 @@ const EditarProducto = () => {
             enableReinitialize
             initialValues={obtenerProducto}
             onSubmit={values => {
-              actualizarInfoProducto(values)
+              actualizarInfoProducto(values);
             }}
           >
             {props => {
-
-              console.log(props)
+              console.log(props);
 
               return (
                 <form
@@ -194,13 +197,13 @@ const EditarProducto = () => {
                     value="Editar Producto"
                   />
                 </form>
-              )
+              );
             }}
           </Formik>
         </div>
       </div>
     </Layout>
-  )
-}
+  );
+};
 
-export default EditarProducto
+export default EditarProducto;
