@@ -2,8 +2,11 @@ import { ApolloClient, createHttpLink, InMemoryCache } from "@apollo/client";
 import fetch from "node-fetch";
 import { setContext } from "apollo-link-context";
 
+let local = "http://localhost:4000/";
+let prod = "https://crm-graph-server.herokuapp.com/";
+
 const httpLink = createHttpLink({
-  uri: "https://crm-graph-server.herokuapp.com/",
+  uri: prod,
   fetch
 });
 

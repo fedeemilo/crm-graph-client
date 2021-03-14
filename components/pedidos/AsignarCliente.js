@@ -39,7 +39,7 @@ const AsignarCliente = () => {
         options={obtenerClientesVendedor}
         onChange={opcion => seleccionarCliente(opcion)}
         getOptionValue={opciones => opciones.id}
-        getOptionLabel={opciones => opciones.nombre}
+        getOptionLabel={opciones => `${opciones.nombre} ${opciones.apellido}`}
         placeholder="Busque o Seleccione el Cliente"
         noOptionsMessage={() => "No hay resultados"}
       />
