@@ -2,15 +2,11 @@ import Layout from "../components/Layout";
 import Cliente from "../components/Cliente";
 import { useQuery } from "@apollo/client";
 import { OBTENER_CLIENTES_USUARIO } from "../gql/querys";
-import { useRouter } from "next/router";
 import Link from "next/link";
 import Loading from "../components/ui/Loading";
 
 const Index = () => {
-  // routing
-  const router = useRouter();
-
-  // Consulta de Apollo
+  // Obtener Clientes
   const { data, loading } = useQuery(OBTENER_CLIENTES_USUARIO);
 
   if (loading)
@@ -34,14 +30,16 @@ const Index = () => {
           </a>
         </Link>
         <div className="overflow-x-scroll">
-          <table className="table-auto shadow-md mt-10 w-full w-lg">
+          <table className="table-auto shadow-md mt-10 w-full w-lg border-separate border border-gray-800">
             <thead className="bg-gray-800">
               <tr className="text-left  text-white">
-                <th className="w-1/5 pl-4 py-2">Nombre</th>
-                <th className="w-1/5 pl-4 py-2">Empresa</th>
-                <th className="w-1/5 pl-4 py-2">Email</th>
-                <th className="w-1/5 pl-4 py-2">Eliminar</th>
-                <th className="w-1/5 pl-4 py-2">Editar</th>
+                <th className="w-1/5 pl-4 py-2 border border-gray-600">
+                  Nombre
+                </th>
+                <th className="w-1/5 pl-4 py-2 border-gray-600">Empresa</th>
+                <th className="w-1/5 pl-4 py-2 border-gray-600">Email</th>
+                <th className="w-1/5 pl-4 py-2 border-gray-600">Eliminar</th>
+                <th className="w-1/5 pl-4 py-2 border-gray-600">Editar</th>
               </tr>
             </thead>
 

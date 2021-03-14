@@ -68,10 +68,10 @@ const Producto = ({ producto }) => {
 
   return (
     <tr>
-      <td className="border px-4 py-2">{nombre}</td>
-      <td className="border px-4 py-2">{stock}</td>
-      <td className="border px-4 py-2">{precio}</td>
-      <td className="border px-4 py-2">
+      <td className="border px-4 py-2 border-gray-600">{nombre}</td>
+      <td className="border px-4 py-2 border-gray-600">{stock}</td>
+      <td className="border px-4 py-2 border-gray-600">{precio}</td>
+      <td className="border px-4 py-2 border-gray-600">
         <button
           type="button"
           className="flex justify-center items-center bg-red-800 py-2 px-4 w-full text-white text-xs uppercase font-bold rounded"
@@ -94,7 +94,7 @@ const Producto = ({ producto }) => {
           </svg>
         </button>
       </td>
-      <td className="border px-4 py-2">
+      <td className="border px-4 py-2 border-gray-600">
         <button
           type="button"
           className="flex justify-center items-center bg-green-600 py-2 px-4 w-full text-white text-xs uppercase font-bold rounded"

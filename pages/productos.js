@@ -34,14 +34,14 @@ const Productos = () => {
         </Link>
 
         <div className="overflow-x-scroll">
-          <table className="table-auto shadow-md mt-10 w-full w-lg">
+          <table className="table-auto shadow-md mt-10 w-full w-lg border-separate border border-gray-800">
             <thead className="bg-gray-800">
               <tr className="text-left  text-white">
-                <th className="w-1/5 pl-4 py-2">Nombre</th>
-                <th className="w-1/5 pl-4 py-2">Stock</th>
-                <th className="w-1/5 pl-4 py-2">Precio</th>
-                <th className="w-1/5 pl-4 py-2">Eliminar</th>
-                <th className="w-1/5 pl-4 py-2">Editar</th>
+                <th className="w-1/5 pl-4 py-2 border-gray-600">Nombre</th>
+                <th className="w-1/5 pl-4 py-2 border-gray-600">Stock</th>
+                <th className="w-1/5 pl-4 py-2 border-gray-600">Precio</th>
+                <th className="w-1/5 pl-4 py-2 border-gray-600">Eliminar</th>
+                <th className="w-1/5 pl-4 py-2 border-gray-600">Editar</th>
               </tr>
             </thead>
 
